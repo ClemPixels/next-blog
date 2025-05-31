@@ -11,7 +11,7 @@ export default function CallToAction() {
         </p>
         <Button
           gradientDuoTone="purpleToPink"
-          className="rounded-tl-xl rounded-bl-none "
+          className="rounded-tl-xl rounded-bl-none w-1/2 mx-auto"
         >
           <a
             href="https://www.100jsprojects.com"

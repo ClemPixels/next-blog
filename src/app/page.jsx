@@ -39,7 +39,7 @@ export default async function Home() {
           View all posts
         </Link>
       </div>
-      <div className="p-3 bg-amber-100 max-w-6xl mx-auto dark:bg-slate-700">
+      <div className="p-3 max-w-6xl mx-auto dark:bg-slate-700">
         <CallToAction />
       </div>
       <div className="p-3 flex flex-col gap-8 py-7">
