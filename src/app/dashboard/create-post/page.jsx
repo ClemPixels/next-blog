@@ -21,6 +21,7 @@ import { app } from "@/firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Image from "next/image";
+import { set } from "mongoose";
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -30,6 +31,7 @@ export default function CreatePostPage() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   console.log(formData);
 
@@ -106,6 +108,7 @@ export default function CreatePostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch("/api/post/create", {
         method: "POST",
@@ -127,7 +130,10 @@ export default function CreatePostPage() {
         router.push(`/post/${data.slug}`);
       }
     } catch (error) {
-      setPublishError("Something went wrong");
+      console.log(error);
+      setPublishError("Something went wrong:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -198,6 +204,8 @@ export default function CreatePostPage() {
             <Image
               src={formData.image}
               alt="upload"
+              width={800}
+              height={400}
               className="w-full h-72 object-cover"
             />
           )}
@@ -212,8 +220,9 @@ export default function CreatePostPage() {
             }}
           />
           <Button type="submit" gradientDuoTone="purpleToPink">
-            Publish
+            {loading ? "Publishing..." : "Publish"}
           </Button>
+          {publishError && <Alert color="failure">{publishError}</Alert>}
         </form>
       </div>
     );
