@@ -12,6 +12,7 @@ export default async function Home() {
     });
     const data = await result.json();
     posts = data.posts;
+    console.log("Posts fetched successfully:", posts);
   } catch (error) {
     console.log("Error getting post:", error);
   }
@@ -45,7 +46,7 @@ export default async function Home() {
       <div className="p-3 flex flex-col gap-8 py-7">
         <RecentPosts limit={9} />
         <Link
-          href={"/search?category=null"}
+          href={"/search?category=all"}
           className="text-lg text-teal-500 hover:underline text-center"
         >
           View all posts

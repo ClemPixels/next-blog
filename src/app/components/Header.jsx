@@ -1,14 +1,17 @@
-"use client";
+("use client");
+
 import { Button, Navbar, TextInput } from "flowbite-react";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { AiFillAppstore } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { dark, light } from "@clerk/themes";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 export default function Header() {
   const path = usePathname();
   const { theme, setTheme } = useTheme();
@@ -70,7 +73,15 @@ export default function Header() {
               baseTheme: theme === "light" ? light : dark,
             }}
             userProfileUrl="/dashboard?tab=profile"
-          />
+          >
+            <UserButton.MenuItems>
+              <UserButton.Action
+                label="Dashboard"
+                labelIcon={<AiFillAppstore />}
+                onClick={() => router.push("/dashboard")}
+              />
+            </UserButton.MenuItems>
+          </UserButton>
         </SignedIn>
         <SignedOut>
           <Link href="/sign-in">
