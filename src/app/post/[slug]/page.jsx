@@ -13,6 +13,7 @@ export default async function PostPage({ params }) {
     });
     const data = await result.json();
     post = data.posts[0];
+    console.log("Post fetched successfully:", post);
   } catch (error) {
     post = { title: "Failed to load post" };
   }
@@ -38,13 +39,15 @@ export default async function PostPage({ params }) {
           {post && post.category}
         </Button>
       </Link>
-      <div className="relative w-full h-72 max-h-[600px]">
-        <Image
-          src={post && post.image}
-          alt={post && post.title}
-          className="mt-10 p-3 max-h-[600px] w-full object-cover"
-        />
-      </div>
+
+      <Image
+        src={post && post.image}
+        alt={post && post.title}
+        width={800}
+        height={400}
+        className="mt-10 p-3 max-h-[600px] w-full object-cover"
+      />
+
       <div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs">
         <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
         <span className="italic">
