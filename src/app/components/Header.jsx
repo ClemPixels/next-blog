@@ -1,4 +1,4 @@
-("use client");
+"use client";
 
 import { Button, Navbar, TextInput } from "flowbite-react";
 import Link from "next/link";
